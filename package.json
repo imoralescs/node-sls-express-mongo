@@ -1,0 +1,31 @@
+{
+  "name": "sls-express-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imoralescs/node-sls-express-mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imoralescs/node-sls-express-mongo/issues"
+  },
+  "homepage": "https://github.com/imoralescs/node-sls-express-mongo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "helmet": "^3.13.0",
+    "lodash.merge": "^4.6.1",
+    "mongoose": "^5.2.5",
+    "serverless-http": "^1.6.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.25.6"
+  }
+}
