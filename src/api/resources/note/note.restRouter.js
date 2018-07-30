@@ -1,15 +1,19 @@
-import express from 'express'
-import userController from './user.controller'
+const express = require('express')
+const util = require('util')
 
-export const userRouter = express.Router()
+const noteController = require('./note.controller')
 
-userRouter.param('id', userController.findByParam)
+const noteRouter = express.Router()
 
-userRouter.route('/')
-  .get(userController.getAll)
-  .post(userController.createOne)
+noteRouter.param('_id', (req, res, next, _id) => noteController.findByParam(req, res, next, _id))
 
-userRouter.route('/:id')
-  .get(userController.getOne)
-  .put(userController.updateOne)
-  .delete(userController.deleteOne)
+noteRouter.route('/')
+  .get((req, res, next) => noteController.getAll(req, res, next))
+  .post((req, res, next) => noteController.createOne(req, res, next))
+
+noteRouter.route('/:_id')
+  .get((req, res, next) => noteController.getOne(req, res, next))
+  .put((req, res, next) => noteController.updateOne(req, res, next))
+  .delete((req, res, next) => noteController.deleteOne(req, res, next))
+
+module.exports = noteRouter

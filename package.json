@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "nodemon": "nodemon ./server.js localhost 3000",
+    "offline": "sls offline start --skipCacheInvalidation"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "serverless-http": "^1.6.0"
   },
   "devDependencies": {
+    "nodemon": "^1.18.3",
     "serverless-offline": "^3.25.6"
   }
 }

@@ -1,31 +1,16 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
-export const schema = {
-  username: {
-    type: String,
-    unique: true,
-    required: true
+const schema = {
+  title: {
+    type: String
   },
-  passwordHash: {
-    required: true,
-    type: String,
+  description: {
+    type: String
   }
 }
 
-const userSchema = new mongoose.Schema(schema, {timestamps: true})
+exports.schema = schema
 
-userSchema.methods = {
-  authenticate(plaintTextPassword) {
-    return bcrypt.compareSync(plainTextPword, this.password)
-  },
-  hashPassword(plaintTextPassword) {
-    if (!plaintTextPassword) {
-      throw new Error('Could not save user')
-    }
+const noteSchema = new mongoose.Schema(schema)
 
-    const salt = bcrypt.genSaltSync(10)
-    return bcrypt.hashSync(plaintTextPassword, salt)
-  }
-}
-
-export const User = mongoose.model('user', userSchema)
+exports.Note = mongoose.model('note', noteSchema)

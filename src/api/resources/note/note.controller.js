@@ -1,4 +1,5 @@
-import { generateControllers } from '../../modules/query'
-import { User } from './user.model'
+const generateControllers = require('../../modules/query')
 
-export default generateControllers(User)
+const { Note } = require('./note.model')
+
+module.exports = generateControllers(Note)

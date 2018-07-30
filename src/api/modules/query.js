@@ -1,9 +1,9 @@
-import merge from 'lodash.merge'
+const merge = require('lodash.merge')
 const testData = {message: 'hello'}
 
 // Meta Programming, process that create programming code.
 // These are generic methods used in the generic controllers for all models
-export const controllers = {
+const controllers = {
   createOne(model, body) {
     return model.create(body)
   },
@@ -30,13 +30,17 @@ export const controllers = {
   }
 }
 
-export const createOne = (model) => (req, res, next) => {
+module.exports.controllers = controllers
+
+const createOne = (model) => (req, res, next) => {
   return controllers.createOne(model, req.body)
     .then(doc => res.status(201).json(doc))
     .catch(error => next(error))
 }
 
-export const updateOne = (model) => async (req, res, next) => {
+module.exports.createOne = createOne
+
+const updateOne = (model) => async (req, res, next) => {
   const docToUpdate = req.docFromId
   const update = req.body
 
@@ -45,25 +49,33 @@ export const updateOne = (model) => async (req, res, next) => {
     .catch(error => next(error))
 }
 
-export const deleteOne = (model) => (req, res, next) => {
+module.exports.updateOne = updateOne
+
+const deleteOne = (model) => (req, res, next) => {
   return controllers.deleteOne(req.docFromId)
     .then(doc => res.status(201).json(doc))
     .catch(error => next(error))
 }
 
-export const getOne = (model) => (req, res, next) => {
+module.exports.deleteOne = deleteOne
+
+const getOne = (model) => (req, res, next) => {
   return controllers.getOne(req.docFromId)
     .then(doc => res.status(200).json(doc))
     .catch(error => next(error))
 }
 
-export const getAll = (model) => (req, res, next) => {
+module.exports.getOne = getOne
+
+const getAll = (model) => (req, res, next) => {
   return controllers.getAll(model)
     .then(docs => res.json(docs))
     .catch(error => next(error))
 }
 
-export const findByParam = (model) => (req, res, next, id) => {
+module.exports.getAll = getAll
+
+const findByParam = (model) => (req, res, next, id) => {
   return controllers.findByParam(model, id)
     .then(doc => {
       if(!doc) {
@@ -79,8 +91,10 @@ export const findByParam = (model) => (req, res, next, id) => {
     })
 }
 
+module.exports.findByParam = findByParam
 
-export const generateControllers = (model, overrides = {}) => {
+// Default generateControllers()
+module.exports = (model, overrides = {}) => {
   const defaults = {
     findByParam: findByParam(model),
     getAll: getAll(model),

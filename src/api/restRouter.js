@@ -1,11 +1,10 @@
-import express from 'express'
-import { userRouter } from './resources/user'
-import { songRouter } from './resources/song'
-import { playlistRouter } from './resources/playlist'
-import { apiErrorHandler } from './modules/errorHandler'
+const express = require('express')
+const noteRouter = require('./resources/note')
+const apiErrorHandler = require('./modules/errorHandler')
 
-export const restRouter = express.Router()
+const restRouter = express.Router()
 
-restRouter.use('/user', userRouter)
-restRouter.use('/song', songRouter)
-restRouter.use('/playlist', playlistRouter)
+restRouter.use('/note', noteRouter)
+restRouter.use(apiErrorHandler)
+
+module.exports = restRouter

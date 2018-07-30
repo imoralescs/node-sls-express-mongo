@@ -1,7 +1,7 @@
 const express = require('express')
 const setupMiddware = require('./middleware')
-const { connect } = require('./db')
-const { restRouter } = require('./api')
+const connect = require('./db')
+const restRouter = require('./api')
 
 // Declare an app from express
 const app = express()
@@ -16,5 +16,8 @@ app.use('/api', restRouter)
 app.all('*', (req, res) => {
     res.json({ok: true})
 })
+
+// Development with Nodemon
+// app.listen(3000, '0.0.0.0');
 
 module.exports = app

@@ -1,1 +1,3 @@
-export { restRouter } from './restRouter'
+const restRouter = require('./restRouter')
+
+module.exports = restRouter
